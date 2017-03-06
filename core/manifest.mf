@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.nigjo.nbm.rm.core
+OpenIDE-Module-Localizing-Bundle: de/nigjo/nbm/rm/core/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
