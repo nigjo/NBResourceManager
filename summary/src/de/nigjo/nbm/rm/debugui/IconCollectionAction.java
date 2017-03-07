@@ -7,7 +7,7 @@ package de.nigjo.nbm.rm.debugui;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import java.awt.BorderLayout;
@@ -30,8 +30,6 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.view.OutlineView;
-import org.openide.filesystems.FileObject;
-import org.openide.filesystems.FileUtil;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.ChildFactory;
@@ -39,6 +37,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle.Messages;
 
+import de.nigjo.nbm.rm.core.ResourceManager;
 import de.nigjo.nbm.rm.core.ResourceRegistration;
 
 @ActionID(
@@ -53,23 +52,20 @@ import de.nigjo.nbm.rm.core.ResourceRegistration;
 @Messages("CTL_IconCollectionAction=Display all Icon Resources")
 public final class IconCollectionAction implements ActionListener
 {
+  @ResourceRegistration(resource = "images.png")
+  public static final String TEST = "de.nigjo.nbm.rm.debugui.action";
+
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    FileObject regRoot = FileUtil.getConfigFile(ResourceRegistration.LAYER_PATH);
-
-    OutlineView view = new OutlineView();
+    OutlineView view = new OutlineView("ID");
     view.addPropertyColumn("nameIcon", "Icon");
-    view.addPropertyColumn("displayName", "Name");
-    //view.setPropertyColumnAttribute("displayName", "nameIcon");
-    view.addPropertyColumn("resouceId", "ID");
     view.addPropertyColumn("resoucePath", "Path");
     view.setShowNodeIcons(false);
+    view.setQuickSearchAllowed(true);
+    //view.set
     view.getOutline().setRootVisible(false);
-//    TableCellRenderer defaultRenderer =
-//        view.getOutline().getDefaultRenderer(Node.Property.class);
     view.getOutline().setDefaultRenderer(Node.Property.class, new ImageRenderer());
-//    BeanTreeView view = new BeanTreeView();
 
     class EMWrapper extends JPanel implements ExplorerManager.Provider
     {
@@ -93,32 +89,26 @@ public final class IconCollectionAction implements ActionListener
     EMWrapper wrapper = new EMWrapper();
     wrapper.add(view);
     wrapper.getExplorerManager().setRootContext(new AbstractNode(
-        Children.create(new ResourceEntryFactory(regRoot), false)));
+        Children.create(new ResourceEntryFactory(), false)));
 
     wrapper.setPreferredSize(new java.awt.Dimension(800, 600));
 
     DialogDisplayer.getDefault().notify(
         new NotifyDescriptor.Message(wrapper));
   }
-
-  private static class ResourceEntryFactory extends ChildFactory<FileObject>
+  
+  private static class ResourceEntryFactory extends ChildFactory<String>
   {
-    private final FileObject regRoot;
-
-    private ResourceEntryFactory(FileObject regRoot)
-    {
-      this.regRoot = regRoot;
-    }
-
     @Override
-    protected boolean createKeys(List<FileObject> toPopulate)
+    protected boolean createKeys(List<String> toPopulate)
     {
-      toPopulate.addAll(Arrays.asList(regRoot.getChildren()));
+      Collection<String> resourceIds = ResourceManager.getDefault().getResourceIds();
+      toPopulate.addAll(resourceIds);
       return true;
     }
 
     @Override
-    protected Node createNodeForKey(FileObject key)
+    protected Node createNodeForKey(String key)
     {
       try
       {
