@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+  <folder name="de.nigjo.nbm.rm">
+    <folder name="Resources">
+      <file name="netbeans-sample-copy.png">
+        <attr name="resourceId" stringvalue="netbeans.sample.copy"/>
+        <attr name="resourcePath" stringvalue="org/netbeans/core/resources/copy.gif"/>
+      </file>
+      <file name="netbeans-sample-error-badge.png">
+        <attr name="resourceId" stringvalue="netbeans.sample.error_badge"/>
+        <attr name="resourcePath" stringvalue="org/netbeans/core/windows/resources/error.png"/>
+      </file>
+    </folder>
+  </folder>
+</filesystem>

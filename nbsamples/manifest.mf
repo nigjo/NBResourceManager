@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.nigjo.nbm.rm.nbicons
+OpenIDE-Module-Layer: de/nigjo/nbm/rm/nbicons/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/nigjo/nbm/rm/nbicons/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
