@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.openide.util.Lookup;
 
 /**
- * Eine neue Klasse von hof. Erstellt Mar 6, 2017, 3:55:58 PM.
+ * A central registration to all known (icon-)resources.
  *
  * @todo Hier fehlt die Beschreibung der Klasse.
  *
@@ -20,8 +20,21 @@ public interface ResourceManager
     return Lookup.getDefault().lookup(ResourceManager.class);
   }
 
+  /**
+   * Resolves a resourceID the the actual resource path.
+   *
+   * @param resId ID of the resource to resolve.
+   *
+   * @return An Optional with the actual path of the resource if the ID could be resolved.
+   * The Optional is empty if the resource is unknown or could not be resolved otherwise.
+   */
   public Optional<String> getResourcePath(String resId);
 
+  /**
+   * Returns a collection of all currently known resource IDs.
+   * 
+   * @return All known resourceIDs or an empty collection.
+   */
   public Collection<String> getResourceIds();
 
 }
