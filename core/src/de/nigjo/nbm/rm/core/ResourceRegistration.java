@@ -14,11 +14,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(
     {
-      ElementType.PACKAGE, ElementType.TYPE, ElementType.FIELD
+      /*ElementType.PACKAGE, */
+      ElementType.METHOD, ElementType.FIELD
     })
 public @interface ResourceRegistration
 {
-  public static final String LAYER_PATH = "de.nigjo.nbm.rm/Resources/";
+  public static final String LAYER_PATH = "de.nigjo.nbm.rm/Resources";
 
   /**
    * The registered key for this resource. The key must be unique to the runtime system.
