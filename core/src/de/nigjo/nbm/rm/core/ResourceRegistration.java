@@ -39,12 +39,4 @@ public @interface ResourceRegistration
    */
   String resource() default "";
 
-  /**
-   * A displayName for this resource, used for debug perpose only.
-   *
-   * @return A display name for this resource. if the first character is a "#", the return
-   * value is treated as a resource bundle key.
-   */
-  String displayName() default "";
-
 }

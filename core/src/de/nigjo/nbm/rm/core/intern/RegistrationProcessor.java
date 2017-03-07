@@ -124,27 +124,6 @@ public class RegistrationProcessor extends LayerGeneratingProcessor
         executableElement.getEnclosingElement().toString(),
         executableElement.getSimpleName().toString());
 
-    String displayName = registration.displayName();
-    if(!displayName.isEmpty())
-    {
-      if(displayName.charAt(0) == '#')
-      {
-        try
-        {
-          fileEntry.bundlevalue("displayName", displayName);
-        }
-        catch(LayerGenerationException ex)
-        {
-          error(executableElement, ex.getLocalizedMessage());
-          return;
-        }
-      }
-      else
-      {
-        fileEntry.stringvalue("displayName", displayName);
-      }
-    }
-
     fileEntry.write();
   }
 
